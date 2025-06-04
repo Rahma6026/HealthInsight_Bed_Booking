@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+        integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin="anonymous"></script>
+
+        <!-- FavIcon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon_io\apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon_io\favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon_io\favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        
+    <title>Bed Management</title>
+</head>
+
+<body>
+    <header>
+        <div class="brand-logo">
+            <i class="fas fa-paper-plane"></i>
+            <div class="brand-logo-name">HealthInsight</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="http://localhost/hospital/#"><button class="log-btn">Home</button></a></li>
+                <li><a href="http://localhost/hospital/hms/user-login.php"><button id="log-btn" class="log-btn">Login</button></a></li>
+                <li><a href="http://localhost/hospital/hms/registration.php"><button id="register-btn" class="register-btn">Sign up</button></a></li>
+                <li><button id="info-btn" class="info-btn">i</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="main-section">
+        <div class="container-l">
+            <h1>Book your Hospitals Bed with us!</h1>
+            <div class="flight-container">
+                <label>Select a Hospital:</label>
+                <select id="flight-select" class="flight-select">
+                    <option value="0" selected>Green Life Hospital</option>
+                    <option value="1">United Hospital</option>
+                    <option value="2">Apollo Hospital</option>
+                    <option value="3">Metropoliton Hospital</option>
+                    <option value="4">BRB Hospital</option>
+                    <option value="5">Evercare Hospital</option>
+                    <option value="6">Bangladesh Specialized Hospital</option>
+                    <option value="7">Renaissance Hospital & Research Institute Ltd.</option>
+                </select>
+            </div>
+            <div class="flight-container">
+                <label>Select Reason for Booking:</label>
+                <select id="flight-select" class="flight-select">
+                    <option value="0" selected>Chronic Kidney Disease</option>
+                    <option value="1">Acute Kidney Injury</option>
+                    <option value="2">Critical organ infiltration</option>
+                    <option value="3">Pulmonary embolus</option>
+                    <option value="4">Single-organ failure</option>
+                    <option value="5">Cardiovascular</option>
+                    <option value="6">Respiratory System</option>
+                    <option value="7">Brain Stroke</option>
+                    <option value="8">Accidental Injury</option>
+                    <option value="9">Hypoxemia/low levels of oxygen in blood</option>
+                    <option value="9">Heart Attack</option>
+                </select>
+            </div>
+            <div class="showcase">
+                <h2 class="guide-title">Bed Visibility</h2>
+                <ul class="showcase-content">
+                    <li>
+                        <div class="icu-content">
+                            <div class="seat icu"></div>
+                            <small class="seat-type">Intensive Care Unit (ICU)</small>
+                        </div>
+                        <div class="wrap">
+                            <div class="dot"></div>
+                            <small class="seat-price" id="seat-icu-price">0</small>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="nicu-content">
+                            <div class="seat nicu"></div>
+                            <small class="seat-type">Neonatal Intensive Care Unit(NICU)</small>
+                        </div>
+                        <div class="wrap">
+                            <div class="dot"></div>
+                            <small class="seat-price" id="seat-nicu-price">0</small>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ccu-content">
+                            <div class="seat ccu"></div>
+                            <small class="seat-type">Critical Care Unit(CCU)</small>
+                        </div>
+                        <div class="wrap">
+                            <div class="dot"></div>
+                            <small class="seat-price" id="seat-ccu-price">0</small>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="hdu-content">
+                            <div class="seat hdu"></div>
+                            <small class="seat-type">High Dependency Unit (HDU)</small>
+                        </div>
+                        <div class="wrap">
+                            <div class="dot"></div>
+                            <small class="seat-price" id="seat-hdu-price">0</small>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="seat unavailable"></div>
+                        <small class="seat-type">Occupied</small>
+                    </li>
+                </ul>
+            </div>
+            <div id="order-container" class="order-container">
+                <h2 class="order-title">Your order</h2>
+                <p id="countText" class="text">
+                    You have selected <span>0</span> seat for a total price of <span>0</span>
+                </p>
+                <form id="order-form" class="order-form">
+                    <div id="detail-container" class="detail-container"></div>
+                    <button id="book-btn" class="book-btn" type="submit">Book now</button>
+                    <small id="error-msg" class="error-msg">Error message</small>
+                </form>
+            </div>
+        </div>
+
+        <div class="container-r">
+            <h1 class="map-title">Patients Bed map: pick your beds</h1>
+            <div class="seat-map">
+                <div class="row">
+                    <div class="column-left">
+                        <div class="col-lab">A</div>
+                        <div class="col-lab">B</div>
+                        <div class="col-lab">C</div>
+                    </div>
+                    <!-- <div class="central"></div> -->
+                    <div class="column-right">
+                        <div class="col-lab">D</div>
+                        <div class="col-lab">E</div>
+                        <div class="col-lab">F</div>
+                    </div>
+                </div>
+                <div class="central">ICU</div>
+                <div class="row">
+                    <div class="row left">
+                        <div class="seat unavailable"><span>ICU_A01</span></div>
+                        <div class="seat unavailable"><span>ICU_B01</span></div>
+                        <div class="seat icu"><span>ICU_C01</span></div>
+                    </div>
+                    <!-- <div class="central">1</div> -->
+                    <div class="row right">
+                        <div class="seat icu"><span>ICU_D01</span></div>
+                        <div class="seat icu"><span>ICU_E01</span></div>
+                        <div class="seat icu"><span>ICU_F01</span></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="row left">
+                        <div class="seat icu"><span>ICU_A02</span></div>
+                        <div class="seat icu"><span>ICU_B02</span></div>
+                        <div class="seat icu"><span>ICU_C02</span></div>
+                    </div>
+                    <!-- <div class="central">2</div> -->
+                    <div class="row right">
+                        <div class="seat icu"><span>ICU_D02</span></div>
+                        <div class="seat icu"><span>ICU_E02</span></div>
+                        <div class="seat unavailable"><span>ICU_F02</span></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row left">
+                        <div class="seat icu"><span>ICU_A03</span></div>
+                        <div class="seat icu"><span>ICU_B03</span></div>
+                        <div class="seat icu"><span>ICU_C03</span></div>
+                    </div>
+                    <!-- <div class="central">3</div> -->
+                    <div class="row right">
+                        <div class="seat icu"><span>ICU_D03</span></div>
+                        <div class="seat icu"><span>ICU_E03</span></div>
+                        <div class="seat unavailable"><span>ICU_F03</span></div>
+                    </div>
+                </div>
+                <div class="central">NICU</div>
+                <div class="row">
+                    <div class="row left">
+                        <div class="seat nicu"><span>NICUA04</span></div>
+                        <div class="seat unavailable"><span>NICUB04</span></div>
+                        <div class="seat unavailable"><span>NICUC04</span></div>
+                    </div>
+                    <!-- <div class="central">4</div> -->
+                    <div class="row right">
+                        <div class="seat nicu"><span>NICUD04</span></div>
+                        <div class="seat nicu"><span>NICUE04</span></div>
+                        <div class="seat nicu"><span>NICUF04</span></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row left">
+                        <div class="seat ccu"><span>NICUA05</span></div>
+                        <div class="seat ccu"><span>NICUB05</span></div>
+                        <div class="seat ccu"><span>NICUC05</span></div>
+                    </div>
+                    <!-- <div class="central">5</div> -->
+                    <div class="row right">
+                        <div class="seat ccu"><span>NICUD05</span></div>
+                        <div class="seat ccu"><span>NICUE05</span></div>
+                        <div class="seat ccu"><span>NICUF05</span></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row left">
+                        <div class="seat ccu"><span>NICUA06</span></div>
+                        <div class="seat ccu"><span>NICUB06</span></div>
+                        <div class="seat ccu"><span>NICUC06</span></div>
+                    </div>
+                    <!-- <div class="central">6</div> -->
+                    <div class="row right">
+                        <div class="seat ccu"><span>NICUD06</span></div>
+                        <div class="seat unavailable"><span>NICUE06</span></div>
+                        <div class="seat unavailable"><span>NICUF06</span></div>
+                    </div>
+                </div>
+                <div class="central">CCU</div>
+                <div class="row">
+                    <div class="row left">
+                        <div class="seat ccu"><span>CCU_A07</span></div>
+                        <div class="seat ccu"><span>CCU_B07</span></div>
+                        <div class="seat ccu"><span>CCU_C07</span></div>
+                    </div>
+                    <!-- <div class="central">7</div> -->
+                    <div class="row right">
+                        <div class="seat ccu"><span>CCU_D07</span></div>
+                        <div class="seat unavailable"><span>CCU_E07</span></div>
+                        <div class="seat unavailable"><span>CCU_F07</span></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row left">
+                        <div class="seat ccu"><span>CCU_A08</span></div>
+                        <div class="seat ccu"><span>CCU_B08</span></div>
+                        <div class="seat ccu"><span>CCU_C08</span></div>
+                    </div>
+                    <!-- <div class="central">8</div> -->
+                    <div class="row right">
+                        <div class="seat ccu"><span>CCU_D08</span></div>
+                        <div class="seat ccu"><span>CCU_E08</span></div>
+                        <div class="seat ccu"><span>CCU_F08</span></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row left">
+                        <div class="seat hdu"><span>CCU_A09</span></div>
+                        <div class="seat unavailable"><span>CCU_B09</span></div>
+                        <div class="seat unavailable"><span>CCU_C09</span></div>
+                    </div>
+                    <!-- <div class="central">9</div> -->
+                    <div class="row right">
+                        <div class="seat hdu"><span>CCU_D09</span></div>
+                        <div class="seat hdu"><span>CCU_E09</span></div>
+                        <div class="seat hdu"><span>CCU_F09</span></div>
+                    </div>
+                </div>
+                <div class="central">HDU</div>
+                <div class="row">
+                    <div class="row left">
+                        <div class="seat hdu"><span>HDU_A10</span></div>
+                        <div class="seat hdu"><span>HDU_B10</span></div>
+                        <div class="seat hdu"><span>HDU_C10</span></div>
+                    </div>
+                    <!-- <div class="central">10</div> -->
+                    <div class="row right">
+                        <div class="seat unavailable"><span>HDU_D10</span></div>
+                        <div class="seat hdu"><span>HDU_E10</span></div>
+                        <div class="seat hdu"><span>HDU_F10</span></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row left">
+                        <div class="seat hdu"><span>HDU_A11</span></div>
+                        <div class="seat hdu"><span>HDU_B11</span></div>
+                        <div class="seat hdu"><span>HDU_C11</span></div>
+                    </div>
+                    <!-- <div class="central">11</div> -->
+                    <div class="row right">
+                        <div class="seat unavailable"><span>HDU_D11</span></div>
+                        <div class="seat unavailable"><span>HDU_E11</span></div>
+                        <div class="seat hdu"><span>HDU_F11</span></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row left">
+                        <div class="seat hdu"><span>HDU_A12</span></div>
+                        <div class="seat hdu"><span>HDU_B12</span></div>
+                        <div class="seat hdu"><span>HDU_C12</span></div>
+                    </div>
+                    <!-- <div class="central">12</div> -->
+                    <div class="row right">
+                        <div class="seat hdu"><span>HDU_D12</span></div>
+                        <div class="seat hdu"><span>HDU_E12</span></div>
+                        <div class="seat hdu"><span>HDU_F12</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Confirmation message -->
+
+    <div id="message" class="message-container">
+        <div class="message">
+            <button id="close-msg" class="close-btn">
+                <i class="far fa-times-circle"></i>
+            </button>
+            <div class="message-header">
+                <h3 class="title"><i class="fas fa-check-circle"></i><span class="order-confirm">Order
+                        confirmed</span></h3>
+            </div>
+            <div class="message-content">
+                <p class="msg">
+                    <span>Your order has been received.</span>
+                    <span id="detail-output">Detail output</span>
+                    <span>Please check your email address to download and print your beds information.</span>
+                    <span>Thank you for booking with us!</span>
+                    <span>The HealthInsight team wish you a good Services.</span>
+                </p>
+            </div>
+            <div class="paper-plane"><img src="Screenshot 2025-02-15 194546.jpg"></div>
+        </div>
+    </div>
+
+    <!-- Mini Login form-->
+
+    <div id="login-container" class="login-container">
+        <form id="login-form" class="login-form">
+            <button id="close-login" class="close-btn">
+                <i class="far fa-times-circle"></i>
+            </button>
+            <div class="form-header">
+                <h3><i class="fas fa-user"></i><span>Login</span></h3>
+            </div>
+            <div class="form-content">
+                <div class="form-control">
+                    <label for="log-username">Username</label>
+                    <input type="text" id="log-username" placeholder="Enter username" />
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="log-password">Password</label>
+                    <input type="password" id="log-password" placeholder="Enter password" />
+                    <small>Error message</small>
+                </div>
+                <button class="form-btn" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Mini Register form -->
+
+    <div id="register-container" class="register-container">
+        <form id="register-form" class="register-form">
+            <button id="close-register" class="close-btn">
+                <i class="far fa-times-circle"></i>
+            </button>
+            <div class="form-header">
+                <h3><i class="fas fa-user"></i><span>Sign up</span></h3>
+            </div>
+            <div class="form-content">
+                <div class="form-control">
+                    <label for="reg-username">Username</label>
+                    <input type="text" id="reg-username" placeholder="Enter username" />
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" placeholder="Enter email" />
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" placeholder="Enter password" />
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="password">Confirm Password</label>
+                    <input type="password" id="password" placeholder="Enter password a second time" />
+                    <small>Error message</small>
+                </div>
+                <button class="form-btn" type="submit">Sign up</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Description message -->
+
+    <div class="description-container">
+        <div class="description">
+            <button id="close-description" class="close-btn">
+                <i class="far fa-times-circle"></i>
+            </button>
+            <div class="description-header">
+                <h3><i class="fas fa-info-circle"></i><span>Description</span></h3>
+            </div>
+            <div class="description-content">
+                <p>
+                    <span>HealthInsight aims to remove barriers to quality healthcare through real-time data analysis and predictive analytics for early health issue detection.
+                    </span>
+
+                    <span> It integrates information from multiple sources, enabling informed decision-making for both patients and medical professionals. 
+                    </span>
+
+                    <span> The platform supports remote monitoring, enhances communication between patients and caregivers, and provides clinicians with detailed patient-centric insights for better care.
+                    </span>
+
+                    <span> Committed to diversity, HealthInsight ensures accessibility for all, including underprivileged communities, with the ultimate goal of improving global healthcare quality.
+                    </span>
+
+                    <span> Thank you for your interest.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="inner-footer">
+            <div class="social-w">
+                <h3>Follow us:</h3>
+                <div class="wrap-icons">
+                    <div class="wrap-icon"><a href="#" onclick="event.preventDefault()"><i
+                                class="fab fa-facebook-f"></i></a>
+                    </div>
+                    <div class="wrap-icon"><a href="#" onclick="event.preventDefault()"><i
+                                class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="wrap-icon"><a href="#" onclick="event.preventDefault()"><i
+                                class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="info-section">
+                <div class="info-w">
+                    <span>Services</span>
+                    <a href="#" onclick="event.preventDefault()">Help & Support</a>
+                    <a href="#" onclick="event.preventDefault()">FAQs</a>
+                    <a href="http://localhost/hospital/#contact_us">Contact us</a>
+                </div>
+                <div class="info-w">
+                    <span>Company</span>
+                    <a href="http://localhost/hospital/#about_us">About us</a>
+                    <a href="#" onclick="event.preventDefault()">Join us</a>
+                    <a href="#" onclick="event.preventDefault()">Newsletter</a>
+                </div>
+                <div class="info-w">
+                    <a href="http://localhost/hospital/#contact_us">Contact</a>
+                    <p>
+                        <br>Aftab Nagar 1212, Dhaka</br>
+                        <br>Phone: 01791203192</br>
+                        <br>Email: healthinsight@gmail.com</br>
+                        <br>Timing: 10:00 Am To 08:00 Pm</br>
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-banner">
+                <a href="#" onclick="event.preventDefault()">HealthInsight | Copyright © 2024 by Tajwer | All Rights Reserved.</a>
+                <a href="#" onclick="event.preventDefault()">Privacy policy</a>
+                <a href="#" onclick="event.preventDefault()">Terms Conditions</a>
+                <a href="#" onclick="event.preventDefault()">Secure Payments</a>
+                <div class="p-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
